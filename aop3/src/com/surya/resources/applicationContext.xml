@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd"> <!-- bean definitions here -->
+<bean id="demoService" class="com.surya.services.DemoService"></bean>
+<bean id="demoAspect"  class="com.surya.aspects.DemoAspect"></bean>
+<aop:config>
+<aop:pointcut expression="execution(* com.surya.services.DemoService.*(..))" id="demoPointcut"/>
+<aop:aspect id="demoAspect" ref="demoAspect">
+<aop:after method="after" pointcut-ref="demoPointcut"/>
+<aop:before method="before" pointcut-ref="demoPointcut"/>
+<aop:around method="around" pointcut-ref="demoPointcut"/>
+<aop:after-returning method="afterReturning" pointcut-ref="demoPointcut" returning="result"/>
+<aop:after-throwing method="afterThrowing" pointcut-ref="demoPointcut" throwing="throwable"/>
+</aop:aspect>
+</aop:config>
+</beans>
